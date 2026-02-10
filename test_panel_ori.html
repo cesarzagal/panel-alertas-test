@@ -765,17 +765,18 @@
     color: #4fc3f7;
 }
 
+/* Controles de animación - VERSION COMPACTA */
 #animationControls {
     position: absolute;
-    bottom: 20px;
+    bottom: 15px;
     left: 50%;
     transform: translateX(-50%);
     background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 100%);
-    padding: 12px 20px;
-    border-radius: 50px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    padding: 8px 14px;
+    border-radius: 40px;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.3);
     display: flex;
-    gap: 10px;
+    gap: 6px;
     align-items: center;
     z-index: 10;
     border: 2px solid #4fc3f7;
@@ -783,17 +784,17 @@
 
 .control-btn {
     background: rgba(255, 255, 255, 0.1);
-    border: 2px solid rgba(255, 255, 255, 0.3);
+    border: 1.5px solid rgba(255, 255, 255, 0.3);
     color: white;
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     transition: all 0.3s;
-    font-size: 16px;
+    font-size: 13px;
 }
 
 .control-btn:hover {
@@ -808,19 +809,19 @@
 
 .speed-controls {
     display: flex;
-    gap: 5px;
-    margin-left: 10px;
-    padding-left: 10px;
+    gap: 4px;
+    margin-left: 6px;
+    padding-left: 6px;
     border-left: 2px solid rgba(255, 255, 255, 0.3);
 }
 
 .speed-btn {
     background: rgba(255, 255, 255, 0.1);
-    border: 2px solid rgba(255, 255, 255, 0.3);
+    border: 1.5px solid rgba(255, 255, 255, 0.3);
     color: white;
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 16px;
+    font-size: 11px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s;
@@ -839,10 +840,10 @@
 }
 
 .divider {
-    width: 2px;
-    height: 30px;
+    width: 1.5px;
+    height: 24px;
     background: rgba(255, 255, 255, 0.3);
-    margin: 0 5px;
+    margin: 0 3px;
 }
 
 
@@ -1551,8 +1552,6 @@
         updateCharts();
     });
 }
-
-    // Actualizar gráficos
     function updateCharts() {
         if (chartTypes) {
             const typesData = [
@@ -1575,211 +1574,67 @@
         }
     }
 
+function openAlertDetail(id) {
+    const alert = alertsData.find(a => a.id === id);
+    if (!alert) return;
+    
+    currentAlertData = alert;
+    const type = typeConfig[alert.type];
+    const status = statusConfig[alert.status];
 
+    // Header
+    document.getElementById('modalHeader').style.background = `linear-gradient(135deg, ${type.color} 0%, ${type.color}99 100%)`;
+    document.getElementById('modalAlertTitle').innerHTML = `<i class="bi bi-${type.icon} me-2"></i>${alert.title}`;
+    
+    // Badges
+    const typeBadge = document.getElementById('modalAlertBadge');
+    typeBadge.textContent = type.label;
+    typeBadge.style.background = type.color;
+    typeBadge.style.color = 'white';
 
+    const statusBadge = document.getElementById('modalAlertStatusBadge');
+    statusBadge.textContent = status.label;
+    statusBadge.style.background = status.color;
+    statusBadge.style.color = 'white';
 
+    // Detalles
+    document.getElementById('detailAlertType').textContent = type.label;
+    document.getElementById('detailVehicle').textContent = alert.vehicle;
+    document.getElementById('detailDriver').textContent = alert.driver;
+    document.getElementById('detailAddress').textContent = alert.address;
+    document.getElementById('detailSpeed').textContent = `${alert.speed} / ${alert.speedLimit} km/h`;
+    document.getElementById('detailDateTime').textContent = `${alert.date} ${alert.hour}`;
 
+    // Velocidad
+    document.getElementById('speedValue').textContent = `${alert.speed} km/h`;
+    const speedClass = alert.speed > alert.speedLimit ? 'high' : alert.speed > alert.speedLimit * 0.8 ? 'medium' : 'low';
+    document.getElementById('speedIndicator').className = `speed-indicator ${speedClass}`;
 
+    updateStatusButtons(alert.status);
+    updateTimeline(alert.history);
 
+    const modal = new bootstrap.Modal(document.getElementById('alertDetailModal'));
+    modal.show();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // Abrir detalle de alerta
-    function openAlertDetail(id) {
-        const alert = alertsData.find(a => a.id === id);
-        if (!alert) return;
-        
-        currentAlertData = alert;
-        const type = typeConfig[alert.type];
-        const status = statusConfig[alert.status];
-
-        // Header
-        document.getElementById('modalHeader').style.background = `linear-gradient(135deg, ${type.color} 0%, ${type.color}99 100%)`;
-        document.getElementById('modalAlertTitle').innerHTML = `<i class="bi bi-${type.icon} me-2"></i>${alert.title}`;
-        
-        // Badges
-        const typeBadge = document.getElementById('modalAlertBadge');
-        typeBadge.textContent = type.label;
-        typeBadge.style.background = type.color;
-        typeBadge.style.color = 'white';
-
-        const statusBadge = document.getElementById('modalAlertStatusBadge');
-        statusBadge.textContent = status.label;
-        statusBadge.style.background = status.color;
-        statusBadge.style.color = 'white';
-
-        // Detalles
-        document.getElementById('detailAlertType').textContent = type.label;
-        document.getElementById('detailVehicle').textContent = alert.vehicle;
-        document.getElementById('detailDriver').textContent = alert.driver;
-        document.getElementById('detailAddress').textContent = alert.address;
-        document.getElementById('detailSpeed').textContent = `${alert.speed} / ${alert.speedLimit} km/h`;
-        document.getElementById('detailDateTime').textContent = `${alert.date} ${alert.hour}`;
-
-        // Velocidad
-        document.getElementById('speedValue').textContent = `${alert.speed} km/h`;
-        const speedClass = alert.speed > alert.speedLimit ? 'high' : alert.speed > alert.speedLimit * 0.8 ? 'medium' : 'low';
-        document.getElementById('speedIndicator').className = `speed-indicator ${speedClass}`;
-
-        updateStatusButtons(alert.status);
-        updateTimeline(alert.history);
-
-        const modal = new bootstrap.Modal(document.getElementById('alertDetailModal'));
-        modal.show();
-
-        document.getElementById('alertDetailModal').addEventListener('shown.bs.modal', function() {
-            initMap(alert);
-            
-            // Mostrar controles inmediatamente
-            document.getElementById('animationControls').style.display = 'flex';
-            updateControlButtons('stopped');
-        }, { once: true });
-        
-        // Limpiar animación al cerrar modal
-        document.getElementById('alertDetailModal').addEventListener('hidden.bs.modal', function() {
+    document.getElementById('alertDetailModal').addEventListener('shown.bs.modal', function() {
+        // Limpiar animación anterior si existe
+        if (animationInProgress) {
             stopAnimation();
-            // NO resetear mapInitialized aquí, mantenerlo para reutilizar el mapa
-        }, { once: false });
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // Inicializar mapa
-    function initMap(alert) {
-        if (map) {
-            console.log('Mapa ya existe');
-            return;
         }
         
-        console.log('Creando mapa');
-        map = new mapboxgl.Map({
-            container: 'alertMap',
-            style: 'mapbox://styles/mapbox/dark-v11',
-            center: [alert.lng, alert.lat],
-            zoom: 10
-        });
+        initMap(alert);
+        
+        // Mostrar controles inmediatamente
+        document.getElementById('animationControls').style.display = 'flex';
+        updateControlButtons('stopped');
+    }, { once: true });
+    
+    // Limpiar animación al cerrar modal
+    document.getElementById('alertDetailModal').addEventListener('hidden.bs.modal', function() {
+        stopAnimation();
+    }, { once: true });
+}
 
-        map.addControl(new mapboxgl.NavigationControl());
-        
-        map.on('load', function() {
-            console.log('Mapa cargado');
-            const fullTrajectory = [...alert.trajectory, { lat: alert.lat, lng: alert.lng }];
-            const bounds = new mapboxgl.LngLatBounds();
-            fullTrajectory.forEach(point => bounds.extend([point.lng, point.lat]));
-            map.fitBounds(bounds, { padding: 80, duration: 1000 });
-        });
-    }
-
-    function cleanupForRestart() {
-        console.log('Limpiando para reiniciar...');
-        
-        // Cancelar animación
-        if (animationFrameId) {
-            cancelAnimationFrame(animationFrameId);
-            animationFrameId = null;
-        }
-        
-        // Remover markers de animación
-        if (animationMarker) {
-            animationMarker.remove();
-            animationMarker = null;
-        }
-        
-        if (speedLabel) {
-            speedLabel.remove();
-            speedLabel = null;
-        }
-        
-        // Remover marker final
-        if (finalMarkerInstance) {
-            finalMarkerInstance.remove();
-            finalMarkerInstance = null;
-        }
-        
-        // Remover popups
-        document.querySelectorAll('.mapboxgl-popup').forEach(p => p.remove());
-        
-        // Remover DOM de markers finales
-        document.querySelectorAll('.final-alert-marker').forEach(m => {
-            if (m.parentElement) m.parentElement.remove();
-        });
-        
-        // Limpiar capas y sources si existen
-        if (map && map.loaded()) {
-            const layers = ['trajectory-line', 'trajectory-line-shadow', 'trajectory-points-inner', 'trajectory-points'];
-            const sources = ['trajectory', 'trajectory-points'];
-            
-            layers.forEach(layer => {
-                if (map.getLayer(layer)) {
-                    map.removeLayer(layer);
-                }
-            });
-            
-            sources.forEach(source => {
-                if (map.getSource(source)) {
-                    map.removeSource(source);
-                }
-            });
-        }
-        
-        console.log('Limpieza completada');
-    }
-
-    // Actualizar botones de estado
     function updateStatusButtons(current) {
         document.querySelectorAll('.status-selector-btn').forEach(btn => btn.classList.remove('active'));
         const activeBtn = document.querySelector(`.status-selector-btn.${current}-btn`);
@@ -1830,8 +1685,6 @@
             }, 800);
         }
     }
-
-    // Actualizar timeline
     function updateTimeline(history) {
         const timeline = document.getElementById('managementTimeline');
         
@@ -1839,7 +1692,6 @@
             timeline.innerHTML = '<p class="text-center" style="color:#8899a6;">Sin gestiones registradas</p>';
             return;
         }
-
         timeline.innerHTML = history.map(function(h) {
             const statusColor = statusConfig[h.type] ? statusConfig[h.type].color : '#6c757d';
             return `
@@ -1856,8 +1708,6 @@
             `;
         }).join('');
     }
-
-    // Agregar gestión
     function addManagement() {
         const type = document.getElementById('managementType').value;
         const desc = document.getElementById('managementDescription').value.trim();
@@ -1896,12 +1746,9 @@
         } else {
             updateTimeline(currentAlertData.history);
         }
-
         document.getElementById('managementDescription').value = '';
         showToast('Gestión registrada', 'success');
     }
-
-    // Filtrar por tipo
     function filterByType(type, btn) {
         document.querySelectorAll('.type-filter-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
@@ -1914,8 +1761,6 @@
             }
         });
     }
-
-    // Filtrar por estado
     function filterByStatus(status, btn) {
         document.querySelectorAll('.status-filter-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
@@ -1928,8 +1773,6 @@
             }
         });
     }
-
-    // Agregar nueva alerta
     function addNewAlert() {
         const types = ['danger', 'warning', 'low', 'success'];
         const statuses = ['pending', 'in-progress', 'second-level'];
@@ -1974,8 +1817,6 @@
         updateAllCounts();
         showToast('Nueva alerta agregada', 'info');
     }
-
-    // Limpiar todas las alertas
     function clearAllAlerts() {
         if (!confirm('¿Estás seguro de eliminar todas las alertas?')) return;
         
@@ -1984,8 +1825,6 @@
         updateAllCounts();
         showToast('Todas las alertas eliminadas', 'warning');
     }
-
-    // Refrescar alertas
     function refreshAlerts() {
         const container = document.getElementById('alertContainer');
         container.style.opacity = '0.5';
@@ -1995,8 +1834,6 @@
             showToast('Alertas actualizadas', 'success');
         }, 500);
     }
-
-    // Cargar más alertas
     function loadMoreAlerts() {
         for (let i = 0; i < 6; i++) {
             setTimeout(function() {
@@ -2004,8 +1841,6 @@
             }, i * 100);
         }
     }
-
-    // Mostrar toast
     function showToast(message, type) {
     const icons = {
         success: 'check-circle-fill',
@@ -2049,47 +1884,6 @@
         }
     }, 3000);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/****************************************  TRAYECTO  ********************************************************/
-// Variables globales
 let animationInProgress = false;
 let animationPaused = false;
 let animationMarker = null;
@@ -2100,7 +1894,34 @@ let animationStartTime = 0;
 let animationElapsedBeforePause = 0;
 let finalMarkerInstance = null;
 
-// Función para generar velocidades
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function generateSpeedForTrajectory(alert) {
     return alert.trajectory.map((point, index) => {
         const variation = Math.random() * 20 - 10;
@@ -2110,41 +1931,138 @@ function generateSpeedForTrajectory(alert) {
         return Math.max(0, Math.round(speed));
     });
 }
+function createFinalMarker(alert) {
+    const fullTrajectory = [...alert.trajectory, { lat: alert.lat, lng: alert.lng }];
+    const finalPos = [fullTrajectory[fullTrajectory.length - 1].lng, fullTrajectory[fullTrajectory.length - 1].lat];
+    
+    console.log('Creando marker final en:', finalPos);
+    
+    const alertMarkerEl = document.createElement('div');
+    alertMarkerEl.className = 'final-marker-wrapper';
+    alertMarkerEl.innerHTML = `
+        <div class="final-marker-pulse"></div>
+        <div class="final-marker-circle">
+            <i class="bi bi-exclamation-triangle-fill"></i>
+        </div>
+    `;
+    
+    finalMarkerInstance = new mapboxgl.Marker({ 
+        element: alertMarkerEl, 
+        anchor: 'center'
+    })
+    .setLngLat(finalPos)
+    .addTo(map);
+    
+    console.log('Marker final creado');
+}
+function cleanupFinalMarker() {
+    if (finalMarkerInstance) {
+        finalMarkerInstance.remove();
+        finalMarkerInstance = null;
+    }
+    document.querySelectorAll('.final-marker-wrapper').forEach(m => {
+        if (m.parentElement) m.parentElement.remove();
+    });
+}
+function cleanupForRestart() {
+    console.log('Limpiando para reiniciar...');
+    
+    // Cancelar animación
+    if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+        animationFrameId = null;
+    }
+    
+    // Remover markers de animación
+    if (animationMarker) {
+        animationMarker.remove();
+        animationMarker = null;
+    }
+    
+    if (speedLabel) {
+        speedLabel.remove();
+        speedLabel = null;
+    }
+    
+    // Remover popups
+    document.querySelectorAll('.mapboxgl-popup').forEach(p => p.remove());
+    
+    // Limpiar capas y sources si existen
+    if (map && map.loaded()) {
+        const layers = ['trajectory-line', 'trajectory-line-shadow', 'trajectory-points-inner', 'trajectory-points'];
+        const sources = ['trajectory', 'trajectory-points'];
+        
+        layers.forEach(layer => {
+            if (map.getLayer(layer)) {
+                map.removeLayer(layer);
+            }
+        });
+        
+        sources.forEach(source => {
+            if (map.getSource(source)) {
+                map.removeSource(source);
+            }
+        });
+    }
+    
+    console.log('Limpieza completada');
+}
+
+function initMap(alert) {
+    if (map) {
+        console.log('Mapa ya existe, centrando en nueva alerta');
+        
+        // Limpiar marker final anterior
+        cleanupFinalMarker();
+        
+        // Limpiar animación
+        cleanupForRestart();
+        
+        // Centrar en la nueva alerta
+        const fullTrajectory = [...alert.trajectory, { lat: alert.lat, lng: alert.lng }];
+        const bounds = new mapboxgl.LngLatBounds();
+        fullTrajectory.forEach(point => bounds.extend([point.lng, point.lat]));
+        map.fitBounds(bounds, { padding: 80, duration: 1000 });
+        
+        // Crear marker final para la nueva alerta
+        setTimeout(() => {
+            createFinalMarker(alert);
+        }, 100);
+        
+        return;
+    }
+    
+    console.log('Creando mapa');
+    map = new mapboxgl.Map({
+        container: 'alertMap',
+        style: 'mapbox://styles/mapbox/dark-v11',
+        center: [alert.lng, alert.lat],
+        zoom: 10
+    });
+
+    map.addControl(new mapboxgl.NavigationControl());
+    
+    map.on('load', function() {
+        console.log('Mapa cargado');
+        const fullTrajectory = [...alert.trajectory, { lat: alert.lat, lng: alert.lng }];
+        const bounds = new mapboxgl.LngLatBounds();
+        fullTrajectory.forEach(point => bounds.extend([point.lng, point.lat]));
+        map.fitBounds(bounds, { padding: 80, duration: 1000 });
+        
+        // Crear marker final al cargar el mapa
+        setTimeout(() => {
+            createFinalMarker(alert);
+        }, 100);
+    });
+}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Función para animar el trayecto
 function animateTrajectory(alert) {
     if (!alert && currentAlertData) {
         alert = currentAlertData;
     }
     
     if (!alert) {
-        console.error('No hay alerta');
         return;
     }
     
@@ -2159,33 +2077,22 @@ function animateTrajectory(alert) {
     }
     
     if (!map || !map.loaded()) {
-        console.log('Esperando mapa...');
         setTimeout(() => animateTrajectory(alert), 300);
         return;
     }
     
     console.log('=== INICIANDO ANIMACIÓN ===');
-    
-    // Resetear estado
     animationInProgress = true;
     animationPaused = false;
     animationElapsedBeforePause = 0;
     
-    // Limpiar primero
+    // Limpiar solo elementos de animación (no el marker final)
     cleanupForRestart();
-    
-    // Mostrar controles
     document.getElementById('animationControls').style.display = 'flex';
     updateControlButtons('playing');
-    
-    // Preparar datos
     const fullTrajectory = [...alert.trajectory, { lat: alert.lat, lng: alert.lng }];
     const coordinates = fullTrajectory.map(point => [point.lng, point.lat]);
     const speeds = [...generateSpeedForTrajectory(alert), alert.speed];
-    
-    console.log('Coordenadas:', coordinates.length);
-    
-    // Agregar sources y capas
     map.addSource('trajectory-points', {
         type: 'geojson',
         data: {
@@ -2233,7 +2140,7 @@ function animateTrajectory(alert) {
         paint: { 'line-color': '#4fc3f7', 'line-width': 6, 'line-opacity': 0.9 }
     });
     
-    // Crear markers de animación
+    // Crear markers de animación (estos desaparecerán al final)
     const markerEl = document.createElement('div');
     markerEl.innerHTML = `
         <div style="position: relative;">
@@ -2254,13 +2161,9 @@ function animateTrajectory(alert) {
         .setLngLat(coordinates[0])
         .addTo(map);
     
-    console.log('Markers creados, iniciando animación');
-    
     // Iniciar animación
     startAnimation(alert, coordinates, speeds, markerEl, speedEl);
 }
-
-// startAnimation
 function startAnimation(alert, coordinates, speeds, markerEl, speedEl) {
     animationStartTime = Date.now();
     const baseDuration = 6000;
@@ -2360,11 +2263,7 @@ function startAnimation(alert, coordinates, speeds, markerEl, speedEl) {
     animate();
 }
 
-// Función para finalizar
-// Reemplaza la función finishAnimation completa
 function finishAnimation(alert, coordinates, speeds) {
-    console.log('Finalizando animación');
-    
     map.getSource('trajectory').setData({
         type: 'Feature',
         geometry: { type: 'LineString', coordinates: coordinates }
@@ -2372,10 +2271,12 @@ function finishAnimation(alert, coordinates, speeds) {
     
     const finalPos = coordinates[coordinates.length - 1];
     
-    // Fade out markers
+    // Fade out markers de animación
     if (animationMarker) {
-        animationMarker.getElement().style.transition = 'opacity 0.5s';
-        animationMarker.getElement().style.opacity = '0';
+        const el = animationMarker.getElement();
+        el.style.transition = 'opacity 0.5s ease-out, transform 0.5s ease-out';
+        el.style.opacity = '0';
+        el.style.transform = 'scale(0.5)';
         setTimeout(() => { 
             if (animationMarker) {
                 animationMarker.remove(); 
@@ -2385,8 +2286,10 @@ function finishAnimation(alert, coordinates, speeds) {
     }
     
     if (speedLabel) {
-        speedLabel.getElement().style.transition = 'opacity 0.5s';
-        speedLabel.getElement().style.opacity = '0';
+        const el = speedLabel.getElement();
+        el.style.transition = 'opacity 0.5s ease-out, transform 0.5s ease-out';
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(-20px)';
         setTimeout(() => { 
             if (speedLabel) {
                 speedLabel.remove(); 
@@ -2395,92 +2298,37 @@ function finishAnimation(alert, coordinates, speeds) {
         }, 500);
     }
     
-    // Marker final - NUEVO DISEÑO
+    // Mostrar popup (el marker de alerta ya está visible)
     setTimeout(() => {
-        const finalEl = document.createElement('div');
-        finalEl.className = 'final-marker-wrapper';
-        finalEl.innerHTML = `
-            <div class="final-marker-pulse"></div>
-            <div class="final-marker-circle">
-                <i class="bi bi-exclamation-triangle-fill"></i>
-            </div>
-        `;
-        
-        finalMarkerInstance = new mapboxgl.Marker({ 
-            element: finalEl, 
-            anchor: 'center'
+        const speedColor = alert.speed > alert.speedLimit ? '#dc3545' : alert.speed > alert.speedLimit * 0.8 ? '#ffc107' : '#28a745';
+        new mapboxgl.Popup({ 
+            offset: [15, 0], 
+            closeButton: false, 
+            anchor: 'left', 
+            maxWidth: 'none' 
         })
         .setLngLat(finalPos)
-        .addTo(map);
-        
-        // Popup
-        setTimeout(() => {
-            const speedColor = alert.speed > alert.speedLimit ? '#dc3545' : alert.speed > alert.speedLimit * 0.8 ? '#ffc107' : '#28a745';
-            new mapboxgl.Popup({ 
-                offset: [15, 0], 
-                closeButton: false, 
-                anchor: 'left', 
-                maxWidth: 'none' 
-            })
-            .setLngLat(finalPos)
-            .setHTML(`
-                <div class="uber-popup popup-bounce-in">
-                    <div class="uber-popup-compact">
-                        <div class="popup-speed" style="color: ${speedColor};">
-                            <i class="bi bi-speedometer2"></i>
-                            <span>${alert.speed} km/h</span>
-                        </div>
-                        <div class="popup-time">
-                            <i class="bi bi-clock"></i>
-                            <span>${alert.hour}</span>
-                        </div>
+        .setHTML(`
+            <div class="uber-popup popup-bounce-in">
+                <div class="uber-popup-compact">
+                    <div class="popup-speed" style="color: ${speedColor};">
+                        <i class="bi bi-speedometer2"></i>
+                        <span>${alert.speed} km/h</span>
+                    </div>
+                    <div class="popup-time">
+                        <i class="bi bi-clock"></i>
+                        <span>${alert.hour}</span>
                     </div>
                 </div>
-            `)
-            .addTo(map);
-        }, 300);
+            </div>
+        `)
+        .addTo(map);
     }, 600);
     
     animationInProgress = false;
     updateControlButtons('stopped');
     console.log('Animación finalizada');
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Función para pausar la animación
 function pauseAnimation() {
     if (!animationInProgress || animationPaused) return;
     animationPaused = true;
@@ -2610,18 +2458,14 @@ function animateStepResume(alert, coordinates, speeds) {
     
     step();
 }
-
-// Función para detener la animación
 function stopAnimation() {
     console.log('Stop');
     animationInProgress = false;
     animationPaused = false;
     animationElapsedBeforePause = 0;
-    cleanupForRestart();
+    cleanupForRestart(); // Solo limpia elementos de animación
     updateControlButtons('stopped');
 }
-
-// Función para reiniciar la animación
 function restartAnimation() {
     console.log('Restart');
     animationInProgress = false;
@@ -2639,8 +2483,6 @@ function restartAnimation() {
         animateTrajectory(currentAlertData);
     }, 200);
 }
-
-// Función para cambiar la velocidad de animación
 function setAnimationSpeed(speed) {
     const wasPlaying = animationInProgress && !animationPaused;
     if (wasPlaying) {
@@ -2654,7 +2496,6 @@ function setAnimationSpeed(speed) {
     document.querySelector(`[data-speed="${speed}"]`).classList.add('active');
 }
 
-// Función para actualizar botones de control
 function updateControlButtons(state) {
     const playBtn = document.getElementById('playBtn');
     const pauseBtn = document.getElementById('pauseBtn');
@@ -2668,15 +2509,10 @@ function updateControlButtons(state) {
 }
 
 function cleanupAnimationElements() {
-    console.log('Limpiando elementos de animación');
-    
-    // Cancelar frame
     if (animationFrameId) {
         cancelAnimationFrame(animationFrameId);
         animationFrameId = null;
     }
-    
-    // Remover markers
     if (animationMarker) {
         try {
             animationMarker.remove();
@@ -2719,8 +2555,6 @@ function cleanupAnimationElements() {
         console.warn('El mapa no está cargado');
         return;
     }
-    
-    // Verificar que el estilo está cargado
     try {
         const style = map.getStyle();
         if (!style) {
@@ -2731,8 +2565,7 @@ function cleanupAnimationElements() {
         console.error('Error al obtener estilo del mapa:', e);
         return;
     }
-    
-    // Ahora sí, limpiar capas de forma segura
+
     const layers = ['trajectory-line', 'trajectory-line-shadow', 'trajectory-points-inner', 'trajectory-points'];
     
     layers.forEach(layer => {
@@ -2745,8 +2578,6 @@ function cleanupAnimationElements() {
             console.error('Error removiendo capa', layer, e);
         }
     });
-    
-    // Limpiar sources después de las capas
     const sources = ['trajectory', 'trajectory-points'];
     
     sources.forEach(source => {
@@ -2759,8 +2590,6 @@ function cleanupAnimationElements() {
             console.error('Error removiendo source', source, e);
         }
     });
-    
-    console.log('Limpieza completada - Estado del mapa:', map ? 'OK' : 'DESTRUIDO');
 }
 
 
