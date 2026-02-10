@@ -512,6 +512,340 @@
     ::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 4px; }
     ::-webkit-scrollbar-thumb { background: var(--fyx-light-blue); border-radius: 4px; }
     ::-webkit-scrollbar-thumb:hover { background: var(--fyx-dark-blue); }
+
+    /*********************************  TRAEYCTO  ****************************************/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    @keyframes ripple {
+        0% {
+            transform: translate(-50%, -50%) scale(0.5);
+            opacity: 1;
+        }
+        100% {
+            transform: translate(-50%, -50%) scale(2);
+            opacity: 0;
+        }
+    }
+
+    @keyframes pulse-speed {
+        0%, 100% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.1);
+        }
+    }
+
+    @keyframes bounce-in {
+        0% {
+            opacity: 0;
+            transform: scale(0.3) translateY(-100px) rotate(-45deg);
+        }
+        50% {
+            opacity: 1;
+            transform: scale(1.1) translateY(0) rotate(-45deg);
+        }
+        70% {
+            transform: scale(0.9) translateY(-10px) rotate(-45deg);
+        }
+        100% {
+            transform: scale(1) translateY(0) rotate(-45deg);
+        }
+    }
+
+    @keyframes popup-bounce {
+        0% {
+            opacity: 0;
+            transform: translateX(-20px) scale(0.8);
+        }
+        60% {
+            opacity: 1;
+            transform: translateX(0) scale(1.05);
+        }
+        80% {
+            transform: scale(0.98);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+
+    @keyframes shadow-pulse {
+        0%, 100% {
+            transform: scale(1);
+            opacity: 0.3;
+        }
+        50% {
+            transform: scale(1.2);
+            opacity: 0.5;
+        }
+    }
+
+    /* Marker final redondo con pulse */
+.final-marker-wrapper {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.final-marker-circle {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(220, 53, 69, 0.5);
+    border: 3px solid white;
+    position: relative;
+    z-index: 2;
+    animation: marker-appear 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.final-marker-circle i {
+    font-size: 15px;
+    color: white;
+}
+
+.final-marker-pulse {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: rgba(220, 53, 69, 0.4);
+    animation: marker-pulse 2s ease-out infinite;
+    z-index: 1;
+}
+
+@keyframes marker-appear {
+    0% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+    60% {
+        transform: scale(1.1);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes marker-pulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.7;
+    }
+    50% {
+        transform: scale(1.5);
+        opacity: 0.3;
+    }
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+    /* Reemplaza el CSS de .marker-pin */
+    .marker-pin {
+        width: 40px;
+        height: 40px;
+        border-radius: 50% 50% 50% 0;
+        background: #dc3545;
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform: rotate(-45deg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        border: 3px solid white;
+    }
+
+    .marker-pin::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 50% 50% 50% 0;
+        background: inherit;
+        opacity: 0.3;
+        animation: shadow-pulse 2s ease-in-out infinite;
+    }
+
+    .marker-pin i {
+        transform: rotate(45deg);
+    }
+
+    .marker-shadow {
+        width: 25px;
+        height: 8px;
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 50%;
+        position: absolute;
+        bottom: -45px;  /* CAMBIADO: de -40px a -45px */
+        left: 50%;
+        transform: translateX(-50%);
+        filter: blur(3px);
+    }
+
+    /* Popup compacto estilo Uber */
+    /* Popup compacto estilo Uber */
+.mapboxgl-popup-content {
+    padding: 0 !important;
+    border-radius: 10px !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25) !important;
+    overflow: hidden !important;
+    background: white !important;
+}
+
+.mapboxgl-popup-anchor-left .mapboxgl-popup-tip {
+    border-right-color: white !important;
+}
+
+.uber-popup {
+    width: auto;
+}
+
+.uber-popup.popup-bounce-in {
+    animation: popup-bounce 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.uber-popup-compact {
+    padding: 10px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background: white;
+    min-width: 140px;
+}
+
+.popup-speed {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #dc3545;
+}
+
+.popup-speed i {
+    font-size: 18px;
+}
+
+.popup-time {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #666;
+}
+
+.popup-time i {
+    font-size: 14px;
+    color: #4fc3f7;
+}
+
+#animationControls {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 100%);
+    padding: 12px 20px;
+    border-radius: 50px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    z-index: 10;
+    border: 2px solid #4fc3f7;
+}
+
+.control-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 16px;
+}
+
+.control-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: #4fc3f7;
+    transform: scale(1.1);
+}
+
+.control-btn:active {
+    transform: scale(0.95);
+}
+
+.speed-controls {
+    display: flex;
+    gap: 5px;
+    margin-left: 10px;
+    padding-left: 10px;
+    border-left: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.speed-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    white-space: nowrap;
+}
+
+.speed-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: #4fc3f7;
+}
+
+.speed-btn.active {
+    background: #4fc3f7;
+    border-color: #4fc3f7;
+    color: #1e3a5f;
+}
+
+.divider {
+    width: 2px;
+    height: 30px;
+    background: rgba(255, 255, 255, 0.3);
+    margin: 0 5px;
+}
+
+
 </style>
 </head>
 <body>
@@ -618,7 +952,32 @@
                 </div>
                 <div class="modal-body">
                     <div class="row g-0">
-                        <div class="col-lg-7"><div id="alertMap"></div></div>
+                        <div class="col-lg-7" style="position: relative;">
+                            <div id="alertMap"></div>
+                            <!-- Controles de animación -->
+                            <div id="animationControls">
+                                <button id="playBtn" class="control-btn" onclick="animateTrajectory(currentAlertData)" title="Reproducir">
+                                    <i class="bi bi-play-fill"></i>
+                                </button>
+                                <button id="pauseBtn" class="control-btn" onclick="pauseAnimation()" title="Pausar" style="display: none;">
+                                    <i class="bi bi-pause-fill"></i>
+                                </button>
+                                <button class="control-btn" onclick="restartAnimation()" title="Reiniciar">
+                                    <i class="bi bi-arrow-clockwise"></i>
+                                </button>
+                                <button class="control-btn" onclick="stopAnimation()" title="Detener">
+                                    <i class="bi bi-stop-fill"></i>
+                                </button>
+                                
+                                <div class="divider"></div>
+                                
+                                <div class="speed-controls">
+                                    <button class="speed-btn" data-speed="0.5" onclick="setAnimationSpeed(0.5)">0.5x</button>
+                                    <button class="speed-btn active" data-speed="1" onclick="setAnimationSpeed(1)">1x</button>
+                                    <button class="speed-btn" data-speed="2" onclick="setAnimationSpeed(2)">2x</button>
+                                </div>
+                            </div>
+                        </div>
                         <div class="col-lg-5">
                             <div class="detail-panel">
                                 <h6 class="fw-bold mb-3" style="color:var(--fyx-light-blue);"><i class="bi bi-toggle-on me-2"></i>Cambiar Estado:</h6>
@@ -690,18 +1049,426 @@
     };
 
     const alertsData = [
-        { id: 1, type: 'danger', title: 'Exceso de Velocidad', message: 'Vehículo superó límite', vehicle: 'ABC-123', driver: 'Juan Pérez', speed: 125, speedLimit: 80, lat: 19.4326, lng: -99.1332, address: 'Av. Reforma #456', time: 'Hace 5 min', date: '09/02/2026', hour: '14:35:22', status: 'pending', history: [{ user: 'Sistema', date: '14:35', text: 'Alerta detectada', type: 'pending', badge: 'Detectada' }] },
-        { id: 2, type: 'warning', title: 'Zona No Autorizada', message: 'Ingreso a geocerca', vehicle: 'XYZ-789', driver: 'Carlos López', speed: 45, speedLimit: 60, lat: 19.4520, lng: -99.1627, address: 'Col. Polanco', time: 'Hace 12 min', date: '09/02/2026', hour: '14:28:15', status: 'in-progress', history: [{ user: 'Sistema', date: '14:28', text: 'Alerta detectada', type: 'pending', badge: 'Detectada' }, { user: 'María', date: '14:30', text: 'Tomando gestión', type: 'in-progress', badge: 'En Desarrollo' }] },
-        { id: 3, type: 'danger', title: 'Botón de Pánico', message: 'Emergencia activada', vehicle: 'DEF-456', driver: 'Ana Martínez', speed: 0, speedLimit: 80, lat: 19.3910, lng: -99.1663, address: 'Coyoacán', time: 'Hace 3 min', date: '09/02/2026', hour: '14:37:45', status: 'second-level', history: [{ user: 'Sistema', date: '14:37', text: 'Pánico activado', type: 'pending', badge: 'Emergencia' }, { user: 'Supervisor', date: '14:38', text: 'Escalado', type: 'second-level', badge: '2do Nivel' }] },
-        { id: 4, type: 'low', title: 'Mantenimiento', message: 'Servicio en 500 km', vehicle: 'GHI-321', driver: 'Roberto Díaz', speed: 65, speedLimit: 80, lat: 19.4284, lng: -99.2072, address: 'Santa Fe', time: 'Hace 1 hora', date: '09/02/2026', hour: '13:40:00', status: 'pending', history: [{ user: 'Sistema', date: '13:40', text: 'Mantenimiento programado', type: 'pending', badge: 'Info' }] },
-        { id: 5, type: 'success', title: 'Entrega Completada', message: 'Paquete entregado', vehicle: 'JKL-654', driver: 'Laura Hernández', speed: 0, speedLimit: 60, lat: 19.3573, lng: -99.1637, address: 'Tlalpan', time: 'Hace 30 min', date: '09/02/2026', hour: '14:10:33', status: 'resolved', history: [{ user: 'Laura', date: '14:10', text: 'Entrega confirmada', type: 'resolved', badge: 'Completada' }] },
-        { id: 6, type: 'warning', title: 'Combustible Bajo', message: 'Nivel menor al 20%', vehicle: 'MNO-987', driver: 'Miguel Torres', speed: 78, speedLimit: 80, lat: 19.4969, lng: -99.1269, address: 'GAM', time: 'Hace 20 min', date: '09/02/2026', hour: '14:20:18', status: 'in-progress', history: [{ user: 'Sistema', date: '14:20', text: 'Combustible bajo', type: 'pending', badge: 'Advertencia' }] },
-        { id: 7, type: 'danger', title: 'Motor Encendido', message: 'Sin movimiento 30 min', vehicle: 'PQR-147', driver: 'Fernando Ruiz', speed: 0, speedLimit: 60, lat: 19.4058, lng: -99.0959, address: 'Iztapalapa', time: 'Hace 8 min', date: '09/02/2026', hour: '14:32:55', status: 'pending', history: [{ user: 'Sistema', date: '14:32', text: 'Ralentí prolongado', type: 'pending', badge: 'Detectada' }] },
-        { id: 8, type: 'low', title: 'Llegada a Destino', message: 'Punto de entrega', vehicle: 'STU-258', driver: 'Patricia Vega', speed: 0, speedLimit: 40, lat: 19.4320, lng: -99.1335, address: 'Centro', time: 'Hace 15 min', date: '09/02/2026', hour: '14:25:42', status: 'resolved', history: [{ user: 'Sistema', date: '14:25', text: 'Llegada confirmada', type: 'resolved', badge: 'Llegada' }] },
-        { id: 9, type: 'warning', title: 'Desvío de Ruta', message: 'Fuera de ruta', vehicle: 'VWX-369', driver: 'Ricardo Mora', speed: 55, speedLimit: 60, lat: 19.3622, lng: -99.1856, address: 'Coyoacán Sur', time: 'Hace 25 min', date: '09/02/2026', hour: '14:15:30', status: 'second-level', history: [{ user: 'Supervisor', date: '14:20', text: 'Escalando', type: 'second-level', badge: '2do Nivel' }] },
-        { id: 10, type: 'success', title: 'Inicio de Jornada', message: 'Jornada iniciada', vehicle: 'YZA-741', driver: 'Sandra Jiménez', speed: 25, speedLimit: 40, lat: 19.4195, lng: -99.1525, address: 'Col. Roma', time: 'Hace 2 horas', date: '09/02/2026', hour: '12:40:00', status: 'resolved', history: [{ user: 'Sandra', date: '12:40', text: 'Check-in', type: 'resolved', badge: 'Iniciada' }] },
-        { id: 11, type: 'danger', title: 'Frenado Brusco', message: 'Frenado de emergencia', vehicle: 'BCD-852', driver: 'Eduardo Castro', speed: 15, speedLimit: 80, lat: 19.4456, lng: -99.1478, address: 'Col. Juárez', time: 'Hace 10 min', date: '09/02/2026', hour: '14:30:12', status: 'in-progress', history: [{ user: 'Ana', date: '14:32', text: 'Contactando', type: 'in-progress', badge: 'En Desarrollo' }] },
-        { id: 12, type: 'low', title: 'Actualización GPS', message: 'GPS actualizado', vehicle: 'EFG-963', driver: 'Gabriela Ríos', speed: 45, speedLimit: 60, lat: 19.3856, lng: -99.1789, address: 'San Ángel', time: 'Hace 45 min', date: '09/02/2026', hour: '13:55:00', status: 'resolved', history: [{ user: 'Sistema', date: '13:55', text: 'GPS v2.5.1', type: 'resolved', badge: 'Actualizado' }] }
+    { 
+        id: 1, 
+        type: 'danger', 
+        title: 'Exceso de Velocidad', 
+        message: 'Vehículo superó límite', 
+        vehicle: 'ABC-123', 
+        driver: 'Juan Pérez', 
+        speed: 125, 
+        speedLimit: 80, 
+        lat: -23.6524, 
+        lng: -70.3954, 
+        address: 'Ruta 5 Norte, Antofagasta', 
+        date: '2026-02-10', 
+        hour: '14:32', 
+        time: 'hace 5 min', 
+        status: 'pending', 
+        history: [],
+        trajectory: [
+            { lat: -23.7194, lng: -70.3987, timestamp: '14:17' },
+            { lat: -23.7149, lng: -70.3981, timestamp: '14:18' },
+            { lat: -23.7104, lng: -70.3975, timestamp: '14:19' },
+            { lat: -23.7059, lng: -70.3969, timestamp: '14:20' },
+            { lat: -23.7014, lng: -70.3963, timestamp: '14:21' },
+            { lat: -23.6969, lng: -70.3957, timestamp: '14:22' },
+            { lat: -23.6924, lng: -70.3951, timestamp: '14:23' },
+            { lat: -23.6879, lng: -70.3945, timestamp: '14:24' },
+            { lat: -23.6834, lng: -70.3939, timestamp: '14:25' },
+            { lat: -23.6789, lng: -70.3933, timestamp: '14:26' },
+            { lat: -23.6744, lng: -70.3927, timestamp: '14:27' },
+            { lat: -23.6699, lng: -70.3921, timestamp: '14:28' },
+            { lat: -23.6654, lng: -70.3915, timestamp: '14:29' },
+            { lat: -23.6609, lng: -70.3909, timestamp: '14:30' },
+            { lat: -23.6564, lng: -70.3903, timestamp: '14:31' }
+        ]
+    },
+    { 
+        id: 2, 
+        type: 'warning', 
+        title: 'Zona No Autorizada', 
+        message: 'Ingreso a geocerca', 
+        vehicle: 'XYZ-789', 
+        driver: 'Carlos López', 
+        speed: 45, 
+        speedLimit: 60, 
+        lat: -24.8854, 
+        lng: -70.2598, 
+        address: 'Calama, Región de Antofagasta', 
+        date: '2026-02-10', 
+        hour: '14:15', 
+        time: 'hace 22 min', 
+        status: 'in-progress', 
+        history: [],
+        trajectory: [
+            { lat: -24.9524, lng: -70.2632, timestamp: '13:53' },
+            { lat: -24.9479, lng: -70.2626, timestamp: '13:54' },
+            { lat: -24.9434, lng: -70.2620, timestamp: '13:55' },
+            { lat: -24.9389, lng: -70.2614, timestamp: '13:56' },
+            { lat: -24.9344, lng: -70.2608, timestamp: '13:57' },
+            { lat: -24.9299, lng: -70.2602, timestamp: '13:58' },
+            { lat: -24.9254, lng: -70.2596, timestamp: '13:59' },
+            { lat: -24.9209, lng: -70.2590, timestamp: '14:00' },
+            { lat: -24.9164, lng: -70.2584, timestamp: '14:01' },
+            { lat: -24.9119, lng: -70.2578, timestamp: '14:02' },
+            { lat: -24.9074, lng: -70.2572, timestamp: '14:03' },
+            { lat: -24.9029, lng: -70.2566, timestamp: '14:04' },
+            { lat: -24.8984, lng: -70.2560, timestamp: '14:05' },
+            { lat: -24.8939, lng: -70.2554, timestamp: '14:06' },
+            { lat: -24.8894, lng: -70.2548, timestamp: '14:07' }
+        ]
+    },
+    { 
+        id: 3, 
+        type: 'danger', 
+        title: 'Botón de Pánico', 
+        message: 'Emergencia activada', 
+        vehicle: 'DEF-456', 
+        driver: 'Ana Martínez', 
+        speed: 0, 
+        speedLimit: 80, 
+        lat: -22.4549, 
+        lng: -68.9235, 
+        address: 'San Pedro de Atacama, Antofagasta', 
+        date: '2026-02-10', 
+        hour: '14:05', 
+        time: 'hace 32 min', 
+        status: 'second-level', 
+        history: [],
+        trajectory: [
+            { lat: -22.5219, lng: -68.9269, timestamp: '13:33' },
+            { lat: -22.5174, lng: -68.9263, timestamp: '13:34' },
+            { lat: -22.5129, lng: -68.9257, timestamp: '13:35' },
+            { lat: -22.5084, lng: -68.9251, timestamp: '13:36' },
+            { lat: -22.5039, lng: -68.9245, timestamp: '13:37' },
+            { lat: -22.4994, lng: -68.9239, timestamp: '13:38' },
+            { lat: -22.4949, lng: -68.9233, timestamp: '13:39' },
+            { lat: -22.4904, lng: -68.9227, timestamp: '13:40' },
+            { lat: -22.4859, lng: -68.9221, timestamp: '13:41' },
+            { lat: -22.4814, lng: -68.9215, timestamp: '13:42' },
+            { lat: -22.4769, lng: -68.9209, timestamp: '13:43' },
+            { lat: -22.4724, lng: -68.9203, timestamp: '13:44' },
+            { lat: -22.4679, lng: -68.9197, timestamp: '13:45' },
+            { lat: -22.4634, lng: -68.9191, timestamp: '13:46' },
+            { lat: -22.4589, lng: -68.9185, timestamp: '13:47' }
+        ]
+    },
+    { 
+        id: 4, 
+        type: 'low', 
+        title: 'Mantenimiento', 
+        message: 'Servicio en 500 km', 
+        vehicle: 'GHI-321', 
+        driver: 'Roberto Díaz', 
+        speed: 65, 
+        speedLimit: 80, 
+        lat: -26.3412, 
+        lng: -70.3324, 
+        address: 'Chañaral, Región de Atacama', 
+        date: '2026-02-10', 
+        hour: '13:50', 
+        time: 'hace 47 min', 
+        status: 'pending', 
+        history: [],
+        trajectory: [
+            { lat: -26.4082, lng: -70.3358, timestamp: '13:28' },
+            { lat: -26.4037, lng: -70.3352, timestamp: '13:29' },
+            { lat: -26.3992, lng: -70.3346, timestamp: '13:30' },
+            { lat: -26.3947, lng: -70.3340, timestamp: '13:31' },
+            { lat: -26.3902, lng: -70.3334, timestamp: '13:32' },
+            { lat: -26.3857, lng: -70.3328, timestamp: '13:33' },
+            { lat: -26.3812, lng: -70.3322, timestamp: '13:34' },
+            { lat: -26.3767, lng: -70.3316, timestamp: '13:35' },
+            { lat: -26.3722, lng: -70.3310, timestamp: '13:36' },
+            { lat: -26.3677, lng: -70.3304, timestamp: '13:37' },
+            { lat: -26.3632, lng: -70.3298, timestamp: '13:38' },
+            { lat: -26.3587, lng: -70.3292, timestamp: '13:39' },
+            { lat: -26.3542, lng: -70.3286, timestamp: '13:40' },
+            { lat: -26.3497, lng: -70.3280, timestamp: '13:41' },
+            { lat: -26.3452, lng: -70.3274, timestamp: '13:42' }
+        ]
+    },
+    { 
+        id: 5, 
+        type: 'success', 
+        title: 'Entrega Completada', 
+        message: 'Paquete entregado', 
+        vehicle: 'JKL-654', 
+        driver: 'Laura Hernández', 
+        speed: 0, 
+        speedLimit: 60, 
+        lat: -27.3668, 
+        lng: -70.3323, 
+        address: 'Copiapó, Región de Atacama', 
+        date: '2026-02-10', 
+        hour: '13:30', 
+        time: 'hace 1 hora', 
+        status: 'resolved', 
+        history: [],
+        trajectory: [
+            { lat: -27.4338, lng: -70.3357, timestamp: '13:08' },
+            { lat: -27.4293, lng: -70.3351, timestamp: '13:09' },
+            { lat: -27.4248, lng: -70.3345, timestamp: '13:10' },
+            { lat: -27.4203, lng: -70.3339, timestamp: '13:11' },
+            { lat: -27.4158, lng: -70.3333, timestamp: '13:12' },
+            { lat: -27.4113, lng: -70.3327, timestamp: '13:13' },
+            { lat: -27.4068, lng: -70.3321, timestamp: '13:14' },
+            { lat: -27.4023, lng: -70.3315, timestamp: '13:15' },
+            { lat: -27.3978, lng: -70.3309, timestamp: '13:16' },
+            { lat: -27.3933, lng: -70.3303, timestamp: '13:17' },
+            { lat: -27.3888, lng: -70.3297, timestamp: '13:18' },
+            { lat: -27.3843, lng: -70.3291, timestamp: '13:19' },
+            { lat: -27.3798, lng: -70.3285, timestamp: '13:20' },
+            { lat: -27.3753, lng: -70.3279, timestamp: '13:21' },
+            { lat: -27.3708, lng: -70.3273, timestamp: '13:22' }
+        ]
+    },
+    { 
+        id: 6, 
+        type: 'warning', 
+        title: 'Combustible Bajo', 
+        message: 'Nivel menor al 20%', 
+        vehicle: 'MNO-987', 
+        driver: 'Miguel Torres', 
+        speed: 78, 
+        speedLimit: 80, 
+        lat: -29.9027, 
+        lng: -71.2519, 
+        address: 'La Serena, Región de Coquimbo', 
+        date: '2026-02-10', 
+        hour: '13:15', 
+        time: 'hace 1 hora', 
+        status: 'in-progress', 
+        history: [],
+        trajectory: [
+            { lat: -29.9697, lng: -71.2553, timestamp: '12:53' },
+            { lat: -29.9652, lng: -71.2547, timestamp: '12:54' },
+            { lat: -29.9607, lng: -71.2541, timestamp: '12:55' },
+            { lat: -29.9562, lng: -71.2535, timestamp: '12:56' },
+            { lat: -29.9517, lng: -71.2529, timestamp: '12:57' },
+            { lat: -29.9472, lng: -71.2523, timestamp: '12:58' },
+            { lat: -29.9427, lng: -71.2517, timestamp: '12:59' },
+            { lat: -29.9382, lng: -71.2511, timestamp: '13:00' },
+            { lat: -29.9337, lng: -71.2505, timestamp: '13:01' },
+            { lat: -29.9292, lng: -71.2499, timestamp: '13:02' },
+            { lat: -29.9247, lng: -71.2493, timestamp: '13:03' },
+            { lat: -29.9202, lng: -71.2487, timestamp: '13:04' },
+            { lat: -29.9157, lng: -71.2481, timestamp: '13:05' },
+            { lat: -29.9112, lng: -71.2475, timestamp: '13:06' },
+            { lat: -29.9067, lng: -71.2469, timestamp: '13:07' }
+        ]
+    },
+    { 
+        id: 7, 
+        type: 'danger', 
+        title: 'Motor Encendido', 
+        message: 'Sin movimiento 30 min', 
+        vehicle: 'PQR-147', 
+        driver: 'Fernando Ruiz', 
+        speed: 0, 
+        speedLimit: 60, 
+        lat: -31.9038, 
+        lng: -71.2452, 
+        address: 'Viña del Mar, Región de Valparaíso', 
+        date: '2026-02-10', 
+        hour: '12:45', 
+        time: 'hace 2 horas', 
+        status: 'pending', 
+        history: [],
+        trajectory: [
+            { lat: -31.9708, lng: -71.2486, timestamp: '12:23' },
+            { lat: -31.9663, lng: -71.2480, timestamp: '12:24' },
+            { lat: -31.9618, lng: -71.2474, timestamp: '12:25' },
+            { lat: -31.9573, lng: -71.2468, timestamp: '12:26' },
+            { lat: -31.9528, lng: -71.2462, timestamp: '12:27' },
+            { lat: -31.9483, lng: -71.2456, timestamp: '12:28' },
+            { lat: -31.9438, lng: -71.2450, timestamp: '12:29' },
+            { lat: -31.9393, lng: -71.2444, timestamp: '12:30' },
+            { lat: -31.9348, lng: -71.2438, timestamp: '12:31' },
+            { lat: -31.9303, lng: -71.2432, timestamp: '12:32' },
+            { lat: -31.9258, lng: -71.2426, timestamp: '12:33' },
+            { lat: -31.9213, lng: -71.2420, timestamp: '12:34' },
+            { lat: -31.9168, lng: -71.2414, timestamp: '12:35' },
+            { lat: -31.9123, lng: -71.2408, timestamp: '12:36' },
+            { lat: -31.9078, lng: -71.2402, timestamp: '12:37' }
+        ]
+    },
+    { 
+        id: 8, 
+        type: 'low', 
+        title: 'Llegada a Destino', 
+        message: 'Punto de entrega', 
+        vehicle: 'STU-258', 
+        driver: 'Patricia Vega', 
+        speed: 0, 
+        speedLimit: 40, 
+        lat: -33.0472, 
+        lng: -71.6127, 
+        address: 'Valparaíso Centro', 
+        date: '2026-02-10', 
+        hour: '12:30', 
+        time: 'hace 2 horas', 
+        status: 'resolved', 
+        history: [],
+        trajectory: [
+            { lat: -33.1142, lng: -71.6161, timestamp: '12:08' },
+            { lat: -33.1097, lng: -71.6155, timestamp: '12:09' },
+            { lat: -33.1052, lng: -71.6149, timestamp: '12:10' },
+            { lat: -33.1007, lng: -71.6143, timestamp: '12:11' },
+            { lat: -33.0962, lng: -71.6137, timestamp: '12:12' },
+            { lat: -33.0917, lng: -71.6131, timestamp: '12:13' },
+            { lat: -33.0872, lng: -71.6125, timestamp: '12:14' },
+            { lat: -33.0827, lng: -71.6119, timestamp: '12:15' },
+            { lat: -33.0782, lng: -71.6113, timestamp: '12:16' },
+            { lat: -33.0737, lng: -71.6107, timestamp: '12:17' },
+            { lat: -33.0692, lng: -71.6101, timestamp: '12:18' },
+            { lat: -33.0647, lng: -71.6095, timestamp: '12:19' },
+            { lat: -33.0602, lng: -71.6089, timestamp: '12:20' },
+            { lat: -33.0557, lng: -71.6083, timestamp: '12:21' },
+            { lat: -33.0512, lng: -71.6077, timestamp: '12:22' }
+        ]
+    },
+    { 
+        id: 9, 
+        type: 'warning', 
+        title: 'Desvío de Ruta', 
+        message: 'Fuera de ruta', 
+        vehicle: 'VWX-369', 
+        driver: 'Ricardo Mora', 
+        speed: 55, 
+        speedLimit: 60, 
+        lat: -33.4489, 
+        lng: -70.6693, 
+        address: 'Santiago Centro, Región Metropolitana', 
+        date: '2026-02-10', 
+        hour: '12:15', 
+        time: 'hace 2 horas', 
+        status: 'in-progress', 
+        history: [],
+        trajectory: [
+            { lat: -33.5159, lng: -70.6727, timestamp: '11:53' },
+            { lat: -33.5114, lng: -70.6721, timestamp: '11:54' },
+            { lat: -33.5069, lng: -70.6715, timestamp: '11:55' },
+            { lat: -33.5024, lng: -70.6709, timestamp: '11:56' },
+            { lat: -33.4979, lng: -70.6703, timestamp: '11:57' },
+            { lat: -33.4934, lng: -70.6697, timestamp: '11:58' },
+            { lat: -33.4889, lng: -70.6691, timestamp: '11:59' },
+            { lat: -33.4844, lng: -70.6685, timestamp: '12:00' },
+            { lat: -33.4799, lng: -70.6679, timestamp: '12:01' },
+            { lat: -33.4754, lng: -70.6673, timestamp: '12:02' },
+            { lat: -33.4709, lng: -70.6667, timestamp: '12:03' },
+            { lat: -33.4664, lng: -70.6661, timestamp: '12:04' },
+            { lat: -33.4619, lng: -70.6655, timestamp: '12:05' },
+            { lat: -33.4574, lng: -70.6649, timestamp: '12:06' },
+            { lat: -33.4529, lng: -70.6643, timestamp: '12:07' }
+        ]
+    },
+    { 
+        id: 10, 
+        type: 'success', 
+        title: 'Inicio de Jornada', 
+        message: 'Jornada iniciada', 
+        vehicle: 'YZA-741', 
+        driver: 'Sandra Jiménez', 
+        speed: 25, 
+        speedLimit: 40, 
+        lat: -33.3650, 
+        lng: -70.5734, 
+        address: 'Las Condes, Santiago', 
+        date: '2026-02-10', 
+        hour: '08:00', 
+        time: 'hace 6 horas', 
+        status: 'resolved', 
+        history: [],
+        trajectory: [
+            { lat: -33.4320, lng: -70.5768, timestamp: '07:38' },
+            { lat: -33.4275, lng: -70.5762, timestamp: '07:39' },
+            { lat: -33.4230, lng: -70.5756, timestamp: '07:40' },
+            { lat: -33.4185, lng: -70.5750, timestamp: '07:41' },
+            { lat: -33.4140, lng: -70.5744, timestamp: '07:42' },
+            { lat: -33.4095, lng: -70.5738, timestamp: '07:43' },
+            { lat: -33.4050, lng: -70.5732, timestamp: '07:44' },
+            { lat: -33.4005, lng: -70.5726, timestamp: '07:45' },
+            { lat: -33.3960, lng: -70.5720, timestamp: '07:46' },
+            { lat: -33.3915, lng: -70.5714, timestamp: '07:47' },
+            { lat: -33.3870, lng: -70.5708, timestamp: '07:48' },
+            { lat: -33.3825, lng: -70.5702, timestamp: '07:49' },
+            { lat: -33.3780, lng: -70.5696, timestamp: '07:50' },
+            { lat: -33.3735, lng: -70.5690, timestamp: '07:51' },
+            { lat: -33.3690, lng: -70.5684, timestamp: '07:52' }
+        ]
+    },
+    { 
+        id: 11, 
+        type: 'danger', 
+        title: 'Frenado Brusco', 
+        message: 'Frenado de emergencia', 
+        vehicle: 'BCD-852', 
+        driver: 'Eduardo Castro', 
+        speed: 15, 
+        speedLimit: 80, 
+        lat: -33.5987, 
+        lng: -70.5781, 
+        address: 'Ruta 5 Sur, Puente Alto', 
+        date: '2026-02-10', 
+        hour: '11:45', 
+        time: 'hace 3 horas', 
+        status: 'pending', 
+        history: [],
+        trajectory: [
+            { lat: -33.6657, lng: -70.5815, timestamp: '11:23' },
+            { lat: -33.6612, lng: -70.5809, timestamp: '11:24' },
+            { lat: -33.6567, lng: -70.5803, timestamp: '11:25' },
+            { lat: -33.6522, lng: -70.5797, timestamp: '11:26' },
+            { lat: -33.6477, lng: -70.5791, timestamp: '11:27' },
+            { lat: -33.6432, lng: -70.5785, timestamp: '11:28' },
+            { lat: -33.6387, lng: -70.5779, timestamp: '11:29' },
+            { lat: -33.6342, lng: -70.5773, timestamp: '11:30' },
+            { lat: -33.6297, lng: -70.5767, timestamp: '11:31' },
+            { lat: -33.6252, lng: -70.5761, timestamp: '11:32' },
+            { lat: -33.6207, lng: -70.5755, timestamp: '11:33' },
+            { lat: -33.6162, lng: -70.5749, timestamp: '11:34' },
+            { lat: -33.6117, lng: -70.5743, timestamp: '11:35' },
+            { lat: -33.6072, lng: -70.5737, timestamp: '11:36' },
+            { lat: -33.6027, lng: -70.5731, timestamp: '11:37' }
+        ]
+    },
+    { 
+        id: 12, 
+        type: 'low', 
+        title: 'Actualización GPS', 
+        message: 'GPS actualizado', 
+        vehicle: 'EFG-963', 
+        driver: 'Gabriela Ríos', 
+        speed: 45, 
+        speedLimit: 60, 
+        lat: -34.1704, 
+        lng: -70.7407, 
+        address: 'Rancagua, Región de O\'Higgins', 
+        date: '2026-02-10', 
+        hour: '11:30', 
+        time: 'hace 3 horas', 
+        status: 'resolved', 
+        history: [],
+        trajectory: [
+            { lat: -34.2374, lng: -70.7441, timestamp: '11:08' },
+            { lat: -34.2329, lng: -70.7435, timestamp: '11:09' },
+            { lat: -34.2284, lng: -70.7429, timestamp: '11:10' },
+            { lat: -34.2239, lng: -70.7423, timestamp: '11:11' },
+            { lat: -34.2194, lng: -70.7417, timestamp: '11:12' },
+            { lat: -34.2149, lng: -70.7411, timestamp: '11:13' },
+            { lat: -34.2104, lng: -70.7405, timestamp: '11:14' },
+            { lat: -34.2059, lng: -70.7399, timestamp: '11:15' },
+            { lat: -34.2014, lng: -70.7393, timestamp: '11:16' },
+            { lat: -34.1969, lng: -70.7387, timestamp: '11:17' },
+            { lat: -34.1924, lng: -70.7381, timestamp: '11:18' },
+            { lat: -34.1879, lng: -70.7375, timestamp: '11:19' },
+            { lat: -34.1834, lng: -70.7369, timestamp: '11:20' },
+            { lat: -34.1789, lng: -70.7363, timestamp: '11:21' },
+            { lat: -34.1744, lng: -70.7357, timestamp: '11:22' }
+        ]
+    }
     ];
 
     // Inicialización
@@ -808,6 +1575,48 @@
         }
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     // Abrir detalle de alerta
     function openAlertDetail(id) {
         const alert = alertsData.find(a => a.id === id);
@@ -853,26 +1662,121 @@
 
         document.getElementById('alertDetailModal').addEventListener('shown.bs.modal', function() {
             initMap(alert);
+            
+            // Mostrar controles inmediatamente
+            document.getElementById('animationControls').style.display = 'flex';
+            updateControlButtons('stopped');
         }, { once: true });
+        
+        // Limpiar animación al cerrar modal
+        document.getElementById('alertDetailModal').addEventListener('hidden.bs.modal', function() {
+            stopAnimation();
+            // NO resetear mapInitialized aquí, mantenerlo para reutilizar el mapa
+        }, { once: false });
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     // Inicializar mapa
     function initMap(alert) {
-        if (map) map.remove();
+        if (map) {
+            console.log('Mapa ya existe');
+            return;
+        }
         
+        console.log('Creando mapa');
         map = new mapboxgl.Map({
             container: 'alertMap',
             style: 'mapbox://styles/mapbox/dark-v11',
             center: [alert.lng, alert.lat],
-            zoom: 14
+            zoom: 10
         });
 
         map.addControl(new mapboxgl.NavigationControl());
+        
+        map.on('load', function() {
+            console.log('Mapa cargado');
+            const fullTrajectory = [...alert.trajectory, { lat: alert.lat, lng: alert.lng }];
+            const bounds = new mapboxgl.LngLatBounds();
+            fullTrajectory.forEach(point => bounds.extend([point.lng, point.lat]));
+            map.fitBounds(bounds, { padding: 80, duration: 1000 });
+        });
+    }
 
-        new mapboxgl.Marker({ color: typeConfig[alert.type].color })
-            .setLngLat([alert.lng, alert.lat])
-            .setPopup(new mapboxgl.Popup().setHTML(`<strong>${alert.vehicle}</strong><br>${alert.driver}`))
-            .addTo(map);
+    function cleanupForRestart() {
+        console.log('Limpiando para reiniciar...');
+        
+        // Cancelar animación
+        if (animationFrameId) {
+            cancelAnimationFrame(animationFrameId);
+            animationFrameId = null;
+        }
+        
+        // Remover markers de animación
+        if (animationMarker) {
+            animationMarker.remove();
+            animationMarker = null;
+        }
+        
+        if (speedLabel) {
+            speedLabel.remove();
+            speedLabel = null;
+        }
+        
+        // Remover marker final
+        if (finalMarkerInstance) {
+            finalMarkerInstance.remove();
+            finalMarkerInstance = null;
+        }
+        
+        // Remover popups
+        document.querySelectorAll('.mapboxgl-popup').forEach(p => p.remove());
+        
+        // Remover DOM de markers finales
+        document.querySelectorAll('.final-alert-marker').forEach(m => {
+            if (m.parentElement) m.parentElement.remove();
+        });
+        
+        // Limpiar capas y sources si existen
+        if (map && map.loaded()) {
+            const layers = ['trajectory-line', 'trajectory-line-shadow', 'trajectory-points-inner', 'trajectory-points'];
+            const sources = ['trajectory', 'trajectory-points'];
+            
+            layers.forEach(layer => {
+                if (map.getLayer(layer)) {
+                    map.removeLayer(layer);
+                }
+            });
+            
+            sources.forEach(source => {
+                if (map.getSource(source)) {
+                    map.removeSource(source);
+                }
+            });
+        }
+        
+        console.log('Limpieza completada');
     }
 
     // Actualizar botones de estado
@@ -1145,6 +2049,721 @@
         }
     }, 3000);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/****************************************  TRAYECTO  ********************************************************/
+// Variables globales
+let animationInProgress = false;
+let animationPaused = false;
+let animationMarker = null;
+let animationFrameId = null;
+let speedLabel = null;
+let animationSpeed = 1;
+let animationStartTime = 0;
+let animationElapsedBeforePause = 0;
+let finalMarkerInstance = null;
+
+// Función para generar velocidades
+function generateSpeedForTrajectory(alert) {
+    return alert.trajectory.map((point, index) => {
+        const variation = Math.random() * 20 - 10;
+        let speed = alert.speedLimit + variation;
+        const proximityFactor = index / alert.trajectory.length;
+        speed = speed * (1 - proximityFactor) + alert.speed * proximityFactor;
+        return Math.max(0, Math.round(speed));
+    });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Función para animar el trayecto
+function animateTrajectory(alert) {
+    if (!alert && currentAlertData) {
+        alert = currentAlertData;
+    }
+    
+    if (!alert) {
+        console.error('No hay alerta');
+        return;
+    }
+    
+    if (animationInProgress && !animationPaused) {
+        console.log('Ya está animando');
+        return;
+    }
+    
+    if (animationPaused) {
+        resumeAnimation();
+        return;
+    }
+    
+    if (!map || !map.loaded()) {
+        console.log('Esperando mapa...');
+        setTimeout(() => animateTrajectory(alert), 300);
+        return;
+    }
+    
+    console.log('=== INICIANDO ANIMACIÓN ===');
+    
+    // Resetear estado
+    animationInProgress = true;
+    animationPaused = false;
+    animationElapsedBeforePause = 0;
+    
+    // Limpiar primero
+    cleanupForRestart();
+    
+    // Mostrar controles
+    document.getElementById('animationControls').style.display = 'flex';
+    updateControlButtons('playing');
+    
+    // Preparar datos
+    const fullTrajectory = [...alert.trajectory, { lat: alert.lat, lng: alert.lng }];
+    const coordinates = fullTrajectory.map(point => [point.lng, point.lat]);
+    const speeds = [...generateSpeedForTrajectory(alert), alert.speed];
+    
+    console.log('Coordenadas:', coordinates.length);
+    
+    // Agregar sources y capas
+    map.addSource('trajectory-points', {
+        type: 'geojson',
+        data: {
+            type: 'FeatureCollection',
+            features: coordinates.map((coord, idx) => ({
+                type: 'Feature',
+                geometry: { type: 'Point', coordinates: coord },
+                properties: { speed: speeds[idx], index: idx }
+            }))
+        }
+    });
+    
+    map.addLayer({
+        id: 'trajectory-points',
+        type: 'circle',
+        source: 'trajectory-points',
+        paint: { 'circle-radius': 3, 'circle-color': '#fff', 'circle-opacity': 0.9 }
+    });
+    
+    map.addLayer({
+        id: 'trajectory-points-inner',
+        type: 'circle',
+        source: 'trajectory-points',
+        paint: { 'circle-radius': 2, 'circle-color': '#4fc3f7', 'circle-opacity': 1 }
+    });
+    
+    map.addSource('trajectory', {
+        type: 'geojson',
+        data: { type: 'Feature', properties: {}, geometry: { type: 'LineString', coordinates: [] } }
+    });
+    
+    map.addLayer({
+        id: 'trajectory-line-shadow',
+        type: 'line',
+        source: 'trajectory',
+        layout: { 'line-join': 'round', 'line-cap': 'round' },
+        paint: { 'line-color': '#000', 'line-width': 8, 'line-opacity': 0.2, 'line-blur': 4 }
+    });
+    
+    map.addLayer({
+        id: 'trajectory-line',
+        type: 'line',
+        source: 'trajectory',
+        layout: { 'line-join': 'round', 'line-cap': 'round' },
+        paint: { 'line-color': '#4fc3f7', 'line-width': 6, 'line-opacity': 0.9 }
+    });
+    
+    // Crear markers de animación
+    const markerEl = document.createElement('div');
+    markerEl.innerHTML = `
+        <div style="position: relative;">
+            <div style="width: 16px; height: 16px; border-radius: 50%; background-color: #4fc3f7; border: 3px solid white; box-shadow: 0 0 20px rgba(79, 195, 247, 0.6), 0 2px 10px rgba(0, 0, 0, 0.3); position: relative; z-index: 2;"></div>
+            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 32px; height: 32px; border-radius: 50%; background-color: rgba(79, 195, 247, 0.3); animation: ripple 1.5s ease-out infinite; z-index: 1;"></div>
+        </div>
+    `;
+    
+    animationMarker = new mapboxgl.Marker({ element: markerEl, anchor: 'center' })
+        .setLngLat(coordinates[0])
+        .addTo(map);
+    
+    const speedEl = document.createElement('div');
+    speedEl.style.cssText = 'background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 100%); color: white; padding: 8px 16px; border-radius: 20px; font-weight: 700; font-size: 14px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); border: 2px solid #4fc3f7; white-space: nowrap; display: flex; align-items: center; gap: 6px;';
+    speedEl.innerHTML = `<i class="bi bi-speedometer2"></i><span id="speedValueAnim">${speeds[0]} km/h</span>`;
+    
+    speedLabel = new mapboxgl.Marker({ element: speedEl, anchor: 'bottom', offset: [0, -35] })
+        .setLngLat(coordinates[0])
+        .addTo(map);
+    
+    console.log('Markers creados, iniciando animación');
+    
+    // Iniciar animación
+    startAnimation(alert, coordinates, speeds, markerEl, speedEl);
+}
+
+// startAnimation
+function startAnimation(alert, coordinates, speeds, markerEl, speedEl) {
+    animationStartTime = Date.now();
+    const baseDuration = 6000;
+    
+    function animate() {
+        if (animationPaused) return;
+        
+        const elapsed = (Date.now() - animationStartTime) * animationSpeed + animationElapsedBeforePause;
+        const progress = Math.min(elapsed / baseDuration, 1);
+        const eased = progress < 0.5 ? 4 * progress * progress * progress : (progress - 1) * (2 * progress - 2) * (2 * progress - 2) + 1;
+        
+        const totalPoints = coordinates.length - 1;
+        const currentFloat = eased * totalPoints;
+        const idx = Math.floor(currentFloat);
+        const frac = currentFloat - idx;
+        
+        if (idx < totalPoints) {
+            const lng = coordinates[idx][0] + (coordinates[idx + 1][0] - coordinates[idx][0]) * frac;
+            const lat = coordinates[idx][1] + (coordinates[idx + 1][1] - coordinates[idx][1]) * frac;
+            const currentPos = [lng, lat];
+            const currentSpeed = Math.round(speeds[idx] + (speeds[idx + 1] - speeds[idx]) * frac);
+            
+            const drawn = coordinates.slice(0, idx + 1);
+            if (frac > 0) drawn.push(currentPos);
+            
+            map.getSource('trajectory').setData({
+                type: 'Feature',
+                geometry: { type: 'LineString', coordinates: drawn }
+            });
+            
+            animationMarker.setLngLat(currentPos);
+            speedLabel.setLngLat(currentPos);
+            
+            const speedColor = currentSpeed > alert.speedLimit ? '#dc3545' : currentSpeed > alert.speedLimit * 0.8 ? '#ffc107' : '#28a745';
+            const speedVal = speedEl.querySelector('#speedValueAnim');
+            if (speedVal) {
+                speedVal.textContent = `${currentSpeed} km/h`;
+                speedEl.style.borderColor = speedColor;
+            }
+            
+            animationFrameId = requestAnimationFrame(animate);
+        } else {
+            finishAnimation(alert, coordinates, speeds);
+        }
+    }
+    
+    animate();
+}
+function startAnimation(alert, coordinates, speeds, markerEl, speedEl) {
+    animationStartTime = Date.now();
+    const baseDuration = 6000;
+    
+    function animate() {
+        if (animationPaused) return;
+        
+        const elapsed = (Date.now() - animationStartTime) * animationSpeed + animationElapsedBeforePause;
+        const progress = Math.min(elapsed / baseDuration, 1);
+        const eased = progress < 0.5 ? 4 * progress * progress * progress : (progress - 1) * (2 * progress - 2) * (2 * progress - 2) + 1;
+        
+        const totalPoints = coordinates.length - 1;
+        const currentFloat = eased * totalPoints;
+        const idx = Math.floor(currentFloat);
+        const frac = currentFloat - idx;
+        
+        if (idx < totalPoints) {
+            const lng = coordinates[idx][0] + (coordinates[idx + 1][0] - coordinates[idx][0]) * frac;
+            const lat = coordinates[idx][1] + (coordinates[idx + 1][1] - coordinates[idx][1]) * frac;
+            const currentPos = [lng, lat];
+            const currentSpeed = Math.round(speeds[idx] + (speeds[idx + 1] - speeds[idx]) * frac);
+            
+            // Actualizar línea
+            const drawn = coordinates.slice(0, idx + 1);
+            if (frac > 0) drawn.push(currentPos);
+            map.getSource('trajectory').setData({
+                type: 'Feature',
+                geometry: { type: 'LineString', coordinates: drawn }
+            });
+            
+            // Actualizar markers
+            animationMarker.setLngLat(currentPos);
+            speedLabel.setLngLat(currentPos);
+            
+            // Actualizar velocidad
+            const speedColor = currentSpeed > alert.speedLimit ? '#dc3545' : currentSpeed > alert.speedLimit * 0.8 ? '#ffc107' : '#28a745';
+            const speedVal = speedEl.querySelector('#speedValueAnim');
+            if (speedVal) {
+                speedVal.textContent = `${currentSpeed} km/h`;
+                speedEl.style.borderColor = speedColor;
+            }
+            
+            animationFrameId = requestAnimationFrame(animate);
+        } else {
+            finishAnimation(alert, coordinates, speeds);
+        }
+    }
+    
+    animate();
+}
+
+// Función para finalizar
+// Reemplaza la función finishAnimation completa
+function finishAnimation(alert, coordinates, speeds) {
+    console.log('Finalizando animación');
+    
+    map.getSource('trajectory').setData({
+        type: 'Feature',
+        geometry: { type: 'LineString', coordinates: coordinates }
+    });
+    
+    const finalPos = coordinates[coordinates.length - 1];
+    
+    // Fade out markers
+    if (animationMarker) {
+        animationMarker.getElement().style.transition = 'opacity 0.5s';
+        animationMarker.getElement().style.opacity = '0';
+        setTimeout(() => { 
+            if (animationMarker) {
+                animationMarker.remove(); 
+                animationMarker = null;
+            }
+        }, 500);
+    }
+    
+    if (speedLabel) {
+        speedLabel.getElement().style.transition = 'opacity 0.5s';
+        speedLabel.getElement().style.opacity = '0';
+        setTimeout(() => { 
+            if (speedLabel) {
+                speedLabel.remove(); 
+                speedLabel = null;
+            }
+        }, 500);
+    }
+    
+    // Marker final - NUEVO DISEÑO
+    setTimeout(() => {
+        const finalEl = document.createElement('div');
+        finalEl.className = 'final-marker-wrapper';
+        finalEl.innerHTML = `
+            <div class="final-marker-pulse"></div>
+            <div class="final-marker-circle">
+                <i class="bi bi-exclamation-triangle-fill"></i>
+            </div>
+        `;
+        
+        finalMarkerInstance = new mapboxgl.Marker({ 
+            element: finalEl, 
+            anchor: 'center'
+        })
+        .setLngLat(finalPos)
+        .addTo(map);
+        
+        // Popup
+        setTimeout(() => {
+            const speedColor = alert.speed > alert.speedLimit ? '#dc3545' : alert.speed > alert.speedLimit * 0.8 ? '#ffc107' : '#28a745';
+            new mapboxgl.Popup({ 
+                offset: [15, 0], 
+                closeButton: false, 
+                anchor: 'left', 
+                maxWidth: 'none' 
+            })
+            .setLngLat(finalPos)
+            .setHTML(`
+                <div class="uber-popup popup-bounce-in">
+                    <div class="uber-popup-compact">
+                        <div class="popup-speed" style="color: ${speedColor};">
+                            <i class="bi bi-speedometer2"></i>
+                            <span>${alert.speed} km/h</span>
+                        </div>
+                        <div class="popup-time">
+                            <i class="bi bi-clock"></i>
+                            <span>${alert.hour}</span>
+                        </div>
+                    </div>
+                </div>
+            `)
+            .addTo(map);
+        }, 300);
+    }, 600);
+    
+    animationInProgress = false;
+    updateControlButtons('stopped');
+    console.log('Animación finalizada');
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Función para pausar la animación
+function pauseAnimation() {
+    if (!animationInProgress || animationPaused) return;
+    animationPaused = true;
+    animationElapsedBeforePause += (Date.now() - animationStartTime) * animationSpeed;
+    if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+        animationFrameId = null;
+    }
+    updateControlButtons('paused');
+}
+
+// Función para reanudar la animación
+function resumeAnimation() {
+    if (!animationInProgress || !animationPaused) return;
+    animationPaused = false;
+    animationStartTime = Date.now();
+    updateControlButtons('playing');
+    
+    if (currentAlertData) {
+        const alert = currentAlertData;
+        const fullTrajectory = [...alert.trajectory, { lat: alert.lat, lng: alert.lng }];
+        const coordinates = fullTrajectory.map(point => [point.lng, point.lat]);
+        const speeds = [...generateSpeedForTrajectory(alert), alert.speed];
+        const markerEl = animationMarker ? animationMarker.getElement() : null;
+        const speedEl = speedLabel ? speedLabel.getElement() : null;
+        
+        if (markerEl && speedEl) {
+            startAnimation(alert, coordinates, speeds, markerEl, speedEl);
+        }
+    }
+}
+
+
+// Función auxiliar para reanudar el step
+function animateStepResume(alert, coordinates, speeds) {
+    const baseDuration = 6000;
+    
+    function easeInOutCubic(t) {
+        return t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
+    }
+    
+    function interpolate(coord1, coord2, fraction) {
+        return [
+            coord1[0] + (coord2[0] - coord1[0]) * fraction,
+            coord1[1] + (coord2[1] - coord1[1]) * fraction
+        ];
+    }
+    
+    function interpolateSpeed(speed1, speed2, fraction) {
+        return Math.round(speed1 + (speed2 - speed1) * fraction);
+    }
+    
+    function getSpeedColor(speed, limit) {
+        if (speed > limit) return '#dc3545';
+        if (speed > limit * 0.8) return '#ffc107';
+        return '#28a745';
+    }
+    
+    function step() {
+        if (animationPaused) return;
+        
+        const currentTime = Date.now();
+        const elapsed = (currentTime - animationStartTime) * animationSpeed + animationElapsedBeforePause;
+        const progress = Math.min(elapsed / baseDuration, 1);
+        const easedProgress = easeInOutCubic(progress);
+        
+        const totalPoints = coordinates.length - 1;
+        const currentFloat = easedProgress * totalPoints;
+        const currentIndex = Math.floor(currentFloat);
+        const fraction = currentFloat - currentIndex;
+        
+        if (currentIndex < totalPoints) {
+            const currentPosition = interpolate(
+                coordinates[currentIndex],
+                coordinates[currentIndex + 1],
+                fraction
+            );
+            
+            const currentSpeed = interpolateSpeed(
+                speeds[currentIndex],
+                speeds[currentIndex + 1],
+                fraction
+            );
+            
+            const drawnCoordinates = coordinates.slice(0, currentIndex + 1);
+            if (fraction > 0) {
+                drawnCoordinates.push(currentPosition);
+            }
+            
+            map.getSource('trajectory').setData({
+                'type': 'Feature',
+                'properties': {},
+                'geometry': {
+                    'type': 'LineString',
+                    'coordinates': drawnCoordinates
+                }
+            });
+            
+            animationMarker.setLngLat(currentPosition);
+            speedLabel.setLngLat(currentPosition);
+            
+            const speedColor = getSpeedColor(currentSpeed, alert.speedLimit);
+            const speedValueElement = document.querySelector('#speedValue');
+            if (speedValueElement) {
+                speedValueElement.textContent = `${currentSpeed} km/h`;
+                speedLabel.getElement().style.borderColor = speedColor;
+            }
+            
+            animationFrameId = requestAnimationFrame(step);
+        } else {
+            map.getSource('trajectory').setData({
+                'type': 'Feature',
+                'properties': {},
+                'geometry': {
+                    'type': 'LineString',
+                    'coordinates': coordinates
+                }
+            });
+            
+            animationMarker.setLngLat([alert.lng, alert.lat]);
+            speedLabel.setLngLat([alert.lng, alert.lat]);
+            
+            animationInProgress = false;
+            updateControlButtons('stopped');
+        }
+    }
+    
+    step();
+}
+
+// Función para detener la animación
+function stopAnimation() {
+    console.log('Stop');
+    animationInProgress = false;
+    animationPaused = false;
+    animationElapsedBeforePause = 0;
+    cleanupForRestart();
+    updateControlButtons('stopped');
+}
+
+// Función para reiniciar la animación
+function restartAnimation() {
+    console.log('Restart');
+    animationInProgress = false;
+    animationPaused = false;
+    animationElapsedBeforePause = 0;
+    
+    if (!currentAlertData || !map || !map.loaded()) {
+        console.error('No se puede reiniciar');
+        return;
+    }
+    
+    cleanupForRestart();
+    
+    setTimeout(() => {
+        animateTrajectory(currentAlertData);
+    }, 200);
+}
+
+// Función para cambiar la velocidad de animación
+function setAnimationSpeed(speed) {
+    const wasPlaying = animationInProgress && !animationPaused;
+    if (wasPlaying) {
+        animationElapsedBeforePause += (Date.now() - animationStartTime) * animationSpeed;
+    }
+    animationSpeed = speed;
+    if (wasPlaying) {
+        animationStartTime = Date.now();
+    }
+    document.querySelectorAll('.speed-btn').forEach(btn => btn.classList.remove('active'));
+    document.querySelector(`[data-speed="${speed}"]`).classList.add('active');
+}
+
+// Función para actualizar botones de control
+function updateControlButtons(state) {
+    const playBtn = document.getElementById('playBtn');
+    const pauseBtn = document.getElementById('pauseBtn');
+    if (state === 'playing') {
+        playBtn.style.display = 'none';
+        pauseBtn.style.display = 'inline-flex';
+    } else {
+        playBtn.style.display = 'inline-flex';
+        pauseBtn.style.display = 'none';
+    }
+}
+
+function cleanupAnimationElements() {
+    console.log('Limpiando elementos de animación');
+    
+    // Cancelar frame
+    if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+        animationFrameId = null;
+    }
+    
+    // Remover markers
+    if (animationMarker) {
+        try {
+            animationMarker.remove();
+        } catch(e) {
+            console.error('Error removiendo animationMarker:', e);
+        }
+        animationMarker = null;
+    }
+    
+    if (speedLabel) {
+        try {
+            speedLabel.remove();
+        } catch(e) {
+            console.error('Error removiendo speedLabel:', e);
+        }
+        speedLabel = null;
+    }
+    
+    // Remover popups
+    document.querySelectorAll('.mapboxgl-popup').forEach(p => {
+        try {
+            p.remove();
+        } catch(e) {}
+    });
+    
+    // Remover markers finales
+    document.querySelectorAll('.final-alert-marker').forEach(m => {
+        try {
+            if (m.parentElement) m.parentElement.remove();
+        } catch(e) {}
+    });
+    
+    // Verificar que el mapa existe y está listo ANTES de limpiar capas
+    if (!map) {
+        console.error('El mapa no existe!');
+        return;
+    }
+    
+    if (!map.loaded()) {
+        console.warn('El mapa no está cargado');
+        return;
+    }
+    
+    // Verificar que el estilo está cargado
+    try {
+        const style = map.getStyle();
+        if (!style) {
+            console.error('El mapa no tiene estilo');
+            return;
+        }
+    } catch(e) {
+        console.error('Error al obtener estilo del mapa:', e);
+        return;
+    }
+    
+    // Ahora sí, limpiar capas de forma segura
+    const layers = ['trajectory-line', 'trajectory-line-shadow', 'trajectory-points-inner', 'trajectory-points'];
+    
+    layers.forEach(layer => {
+        try {
+            if (map.getLayer(layer)) {
+                map.removeLayer(layer);
+                console.log('Capa removida:', layer);
+            }
+        } catch(e) {
+            console.error('Error removiendo capa', layer, e);
+        }
+    });
+    
+    // Limpiar sources después de las capas
+    const sources = ['trajectory', 'trajectory-points'];
+    
+    sources.forEach(source => {
+        try {
+            if (map.getSource(source)) {
+                map.removeSource(source);
+                console.log('Source removido:', source);
+            }
+        } catch(e) {
+            console.error('Error removiendo source', source, e);
+        }
+    });
+    
+    console.log('Limpieza completada - Estado del mapa:', map ? 'OK' : 'DESTRUIDO');
+}
+
+
 </script>
 </body>
 </html>
